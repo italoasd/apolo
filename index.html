@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cart-container">
+    <div>
+    <h1 class="roboto-medium">Carrinho de Compras</h1>
+    <ul class="title-cart-items">
+      <li class="cart-item">
+        <div class="title-img"></div>
+        <span><b>Nome</b></span>
+        <span><b>Valor</b></span>
+        <span><b>Quantidade</b></span>
+        <div class="title-img"></div>
+      </li>
+    </ul>
+    <ul class="cart-items">
+      </ul>
+    </div>
+    <div class="cart-summary">
+      <p>Subtotal: <span id="subtotal"></span></p>
+      <p>Frete: <span id="shipping"></span></p>
+      <p>Impostos: <span id="taxes"></span></p>
+      <p class="total">Total: <span id="total"></span></p>
+      <button id="checkout-button">Finalizar Compra</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
