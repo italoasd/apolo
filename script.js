@@ -1,166 +1,72 @@
-// Array para armazenar os produtos no carrinho
-const cart = [];
-
-// Função para adicionar um produto ao carrinho
-function addToCart(product) {
-  cart.push(product);
-  updateCart();
+// Função para mostrar ou ocultar o campo do número do cartão
+function toggleCardInput() {
+    var paymentMethod = document.getElementById('paymentMethod').value;
+    var cardNumberInput = document.getElementById('cardNumberInput');
+    
+    if (paymentMethod === 'credit' || paymentMethod === 'debit') {
+        cardNumberInput.style.display = 'block';
+        formatCardNumberInput(); // Formatar o número do cartão se estiver visível
+    } else {
+        cardNumberInput.style.display = 'none';
+    }
 }
 
-// Função para remover um produto do carrinho
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCart();
-}
-
-// Função para atualizar a exibição do carrinho
-function updateCart() {
-  const cartItems = document.querySelector('.cart-items');
-  cartItems.innerHTML = ''; // Limpa o conteúdo anterior
-
-  let subtotal = 0;
-  for (let i = 0; i < cart.length; i++) {
-    const product = cart[i];
-    const cartItem = document.createElement('li');
-    cartItem.classList.add('cart-item');
-
-    const image = document.createElement('img');
-    image.src = product.image;
-    cartItem.appendChild(image);
-
-    const name = document.createElement('span');
-    name.innerText = product.name;
-    cartItem.appendChild(name);
-
-    const price = document.createElement('span');
-    price.innerText = `R$ ${product.price}`;
-    cartItem.appendChild(price);
-
-    const quantity = document.createElement('input');
-    quantity.type = 'number';
-    quantity.value = product.quantity;
-    quantity.min = 1;
-    quantity.addEventListener('change', () => {
-      product.quantity = parseInt(quantity.value);
-      updateCart();
+// Função para formatar o número do cartão
+function formatCardNumberInput() {
+    var cardNumberInput = document.getElementById('cardNumber');
+    cardNumberInput.addEventListener('input', function() {
+        var value = cardNumberInput.value.replace(/\D/g, '');
+        value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+        cardNumberInput.value = value;
     });
-    cartItem.appendChild(quantity);
-
-    const removeButton = document.createElement('button');
-    removeButton.innerText = 'Remover';
-    removeButton.addEventListener('click', () => removeFromCart(i));
-    cartItem.appendChild(removeButton);
-
-    cartItems.appendChild(cartItem);
-
-    subtotal += product.price * product.quantity;
-  }
-
-  // Calcula e exibe valores de subtotal, frete, impostos e total
-  const shipping = calculateShipping(subtotal);
-  const taxes = calculateTaxes(subtotal);
-  const total = subtotal + shipping + taxes;
-
-  document.getElementById('subtotal').innerText = `R$ ${subtotal}`;
-  document.getElementById('shipping').innerText = `R$ ${shipping}`;
-  document.getElementById('taxes').innerText = `R$ ${taxes}`;
-  document.getElementById('total').innerText = `R$ ${total}`;
 }
 
-// Função para calcular o frete
-function calculateShipping(subtotal) {
-  if (subtotal >= 100) {
-    return 0;
-  } else {
-    return 5;
-  }
+// Função para formatar o CPF
+function formatCPFInput() {
+    console.log("Formatando CPF...");
+    var cpfInput = document.getElementById('cpf');
+    var value = cpfInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    var newValue = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); // Formata o CPF
+    cpfInput.value = newValue;
 }
 
-// Função para calcular os impostos
-function calculateTaxes(subtotal) {
-  return subtotal * 0.1;
+// Função para formatar o número do cartão
+function formatCardNumberInput() {
+    console.log("Formatando número do cartão...");
+    var cardNumberInput = document.getElementById('cardNumber');
+    var value = cardNumberInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    var newValue = value.replace(/(\d{4})(?=\d)/g, '$1 '); // Adiciona espaço a cada 4 caracteres
+    cardNumberInput.value = newValue;
 }
 
-// Função para finalizar a compra
-function checkout() {
-  // TODO: Implementar a lógica de finalizar a compra
-  alert('Compra finalizada com sucesso!');
+// Função para verificar se o número do cartão possui o formato correto
+function isValidCardNumber() {
+    console.log("Validando número do cartão...");
+    var cardNumberInput = document.getElementById('cardNumber');
+    var pattern = /^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$/;
+    return pattern.test(cardNumberInput.value);
 }
 
-// Adiciona eventos aos botões de checkout
-const checkoutButton = document.getElementById('checkout-button');
-checkoutButton.addEventListener('click', checkout);
-
-// Exibe os produtos iniciais no carrinho
-const initialProducts = [
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Produto 1',
-    price: 10,
-    quantity: 1,
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Produto 2',
-    price: 20,
-    quantity: 2,
-  },
-];
-
-cart.push(...initialProducts);
-updateCart();
-
-//------------------------------------------------------
-// Array de produtos
-const products = [
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Produto 1',
-    price: 10,
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Produto 2',
-    price: 20,
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Produto 3',
-    price: 30,
-  },
-];
-
-// Função para exibir os produtos
-function renderProducts() {
-  const productsContainer = document.querySelector('.products-container');
-  productsContainer.innerHTML = ''; // Limpa o conteúdo anterior
-
-  for (const product of products) {
-    const productCard = document.createElement('div');
-    productCard.classList.add('product-card');
-
-    const image = document.createElement('img');
-    image.src = product.image;
-    productCard.appendChild(image);
-
-    const name = document.createElement('h2');
-    name.innerText = product.name;
-    productCard.appendChild(name);
-
-    const price = document.createElement('p');
-    price.innerText = `R$ ${product.price}`;
-    productCard.appendChild(price);
-
-    const button = document.createElement('button');
-    button.innerText = 'Adicionar ao Carrinho';
-    button.addEventListener('click', () => {
-      // TODO: Adicionar o produto ao carrinho
-      alert(`Produto ${product.name} adicionado ao carrinho!`);
-    });
-    productCard.appendChild(button);
-
-    productsContainer.appendChild(productCard);
-  }
+// Função para verificar se o CPF possui o formato correto
+function isValidCPF() {
+    console.log("Validando CPF...");
+    var cpfInput = document.getElementById('cpf');
+    var pattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    return pattern.test(cpfInput.value);
 }
 
-renderProducts();
+// Event listeners para chamar as funções de formatação e validação ao digitar nos campos
+document.getElementById('cpf').addEventListener('input', formatCPFInput);
+document.getElementById('cardNumber').addEventListener('input', formatCardNumberInput);
+
+// Event listener para validar o formulário antes de enviar
+document.getElementById('productForm').addEventListener('submit', function(event) {
+    var paymentMethod = document.getElementById('paymentMethod').value;
+    if ((paymentMethod === 'credit' || paymentMethod === 'debit') && !isValidCardNumber()) {
+        event.preventDefault(); // Impede o envio do formulário se o número do cartão for inválido
+    }
+
+    if ((paymentMethod === 'credit' || paymentMethod === 'debit') && !isValidCPF()) {
+        event.preventDefault(); // Impede o envio do formulário se o CPF for inválido
+    }
+});
