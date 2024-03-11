@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho de Compras</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Produtos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="cart-container">
-    <div>
-    <h1 class="roboto-medium">Carrinho de Compras</h1>
-    <ul class="title-cart-items">
-      <li class="cart-item">
-        <div class="title-img"></div>
-        <span><b>Nome</b></span>
-        <span><b>Valor</b></span>
-        <span><b>Quantidade</b></span>
-        <div class="title-img"></div>
-      </li>
-    </ul>
-    <ul class="cart-items">
-      </ul>
+    <div class="container">
+        <h2>Seleção de Produtos</h2>
+        <form id="productForm" action="dados_cliente.php" method="POST">
+            <div>
+                <label for="productName">Nome do Produto:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div>
+                <label for="quantity">Quantidade:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+            <div>
+                <label for="model">Modelo:</label>
+                <input type="text" id="model" name="model">
+            </div>
+            <div>
+                <label for="color">Cor:</label>
+                <input type="text" id="color" name="color">
+            </div>
+            <div>
+                <label for="paymentMethod">Forma de Pagamento:</label>
+                <select id="paymentMethod" name="paymentMethod" onchange="toggleCardInput()" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="credit">Cartão de Crédito</option>
+                    <option value="debit">Cartão de Débito</option>
+                    <option value="cash">Dinheiro</option>
+                    <option value="pix">Pix</option>
+                </select>
+            </div>
+            <div id="cardNumberInput" style="display: none;">
+                <label for="cardNumber">Número do Cartão:</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}">
+            </div>
+            <button type="submit">Continuar</button>
+        </form>
     </div>
-    <div class="cart-summary">
-      <p>Subtotal: <span id="subtotal"></span></p>
-      <p>Frete: <span id="shipping"></span></p>
-      <p>Impostos: <span id="taxes"></span></p>
-      <p class="total">Total: <span id="total"></span></p>
-      <button id="checkout-button">Finalizar Compra</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
