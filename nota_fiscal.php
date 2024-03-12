@@ -23,7 +23,16 @@
             <p><strong>E-mail:</strong> <?php echo $_POST['email']; ?></p>
             <p><strong>CEP:</strong> <?php echo $_POST['cep']; ?></p>
             <p><strong>Número:</strong> <?php echo $_POST['number']; ?></p>
-            <p><strong>Total:</strong> R$<?php echo $_POST['price']; ?></p>
+            <p><strong>Valor:</strong> R$<?php echo $_POST['price']; ?></p>
+            
+            <?php 
+            // Calcula o valor total
+            $preco = $_POST['price'];
+            $quantidade = $_POST['quantity'];
+            $total = $preco * $quantidade;
+            ?>
+            
+            <p><strong>Valor Total:</strong> R$<?php echo $total; ?></p>
         </div>
         <button onclick="window.print()">Imprimir Nota Fiscal</button>
     </div>
