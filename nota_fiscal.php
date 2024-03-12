@@ -23,6 +23,7 @@
             <p><strong>E-mail:</strong> <?php echo $_POST['email']; ?></p>
             <p><strong>CEP:</strong> <?php echo $_POST['cep']; ?></p>
             <p><strong>Número:</strong> <?php echo $_POST['number']; ?></p>
+            <p><strong>Total:</strong> R$<?php echo $_POST['price']; ?></p>
         </div>
         <button onclick="window.print()">Imprimir Nota Fiscal</button>
     </div>

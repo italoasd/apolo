@@ -12,6 +12,7 @@
         <form id="customerForm" action="nota_fiscal.php" method="POST">
             <input type="hidden" id="productName" name="productName" value="<?php echo $_POST['productName']; ?>">
             <input type="hidden" id="quantity" name="quantity" value="<?php echo $_POST['quantity']; ?>">
+            <input type="hidden" id="price" name="price" value="<?php echo $_POST['price']; ?>">
             <input type="hidden" id="model" name="model" value="<?php echo $_POST['model']; ?>">
             <input type="hidden" id="color" name="color" value="<?php echo $_POST['color']; ?>">
             <input type="hidden" id="paymentMethod" name="paymentMethod" value="<?php echo $_POST['paymentMethod']; ?>">
